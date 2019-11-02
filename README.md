@@ -51,7 +51,7 @@ A visitor is any user browsing our the site who is not logged in. As a  visitor,
 - All merchants
 - Cart
 
-![](../media/visitor.gif?raw=true)
+![](https://github.com/grwthomps/monster_shop_1908/blob/media/visitor.gif)
 
 ## Regular User
 
@@ -79,7 +79,7 @@ Regular users are registered and logged in to the site with the same abilities a
 - Viewing their order details
 - Cancelling their unshipped orders
 
-![](../media/default_user.gif?raw=true)
+![](https://github.com/grwthomps/monster_shop_1908/blob/media/default_user.gif)
 
 ## Merchant employee
 
@@ -109,7 +109,7 @@ A merchant employee works for a merchant and can fulfill orders for that merchan
 - Marking items active or inactive
 - Deleting an item
 
-![](../media/merchant_employee.gif?raw=true)
+![](https://github.com/grwthomps/monster_shop_1908/blob/media/merchant_employee.gif)
 
 ## Merchant Admin
 
@@ -134,7 +134,7 @@ Merchant administrators also work for a merchant but have additional capabilitie
 - Viewing their own items in an order
 - Fulfilling items in an order
 
-![](../media/merchant_admin.gif?raw=true)
+![](https://github.com/grwthomps/monster_shop_1908/blob/media/merchant_admin.gif)
 
 ## Admin
 
@@ -176,7 +176,7 @@ However, there are some things that Administrators **cannot** do. These include:
 
 In addition, Administrators **cannot** edit a user's profile information or change their password.
 
-![](../media/admin.gif?raw=true)
+![](https://github.com/grwthomps/monster_shop_1908/blob/media/admin.gif)
 
 ---
 
