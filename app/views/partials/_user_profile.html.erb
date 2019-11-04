@@ -38,3 +38,31 @@
     <%= link_to 'Change Your Password', '/profile/edit?info=false', class: 'btn btn-danger ml-2 mr-2' %>
   <% end %>
 </article>
+
+<% if !current_user.admin? %>
+  <div class="text-center mt-4">
+    <h1>Your Addresses</h1>
+    <%= link_to 'Add New Address', '', class: 'btn btn-primary mt-2 mb-2' %>
+  </div>
+  <section class="container-fluid row justify-content-center">
+    <section class = "card card-body bg-light m-3 p-4 col-md-3" id= 'address-home'>
+      <h2 class="text-center">Home</h2>
+      <p>Street: <%= current_user.address %></p>
+      <p>City: <%= current_user.city %></p>
+      <p>State: <%= current_user.state %></p>
+      <p>Zip: <%= current_user.zip %></p>
+      <%= link_to 'Edit', '/profile/edit', class: 'btn btn-primary' %>
+    </section>
+
+    <% @user.addresses.each do |address| %>
+      <section class = "card card-body bg-light m-3 p-4 col-md-3" id= 'address-<%=address.id%>'>
+        <h2 class="text-center"> <%= address.nickname %> </h2>
+        <p>Street: <%= address.street %></p>
+        <p>City: <%= address.city %></p>
+        <p>State: <%= address.state %></p>
+        <p>Zip: <%= address.zip %></p>
+        <%= link_to 'Edit', '', class: 'btn btn-primary' %>
+      </section>
+    <% end %>
+  </section>
+<% end %>

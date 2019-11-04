@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe 'As a default user' do
   before :each do
     @user = User.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123")
+    @address_2 = @user.addresses.create!(nickname: 'Work', street: "478 Hanover Blvd", city: "Denver", state: "CO", zip: 80128)
+    @address_3 = @user.addresses.create!(nickname: 'Mom\'s', street: "101 Sixma Ave", city: "Deltona", state: "FL", zip: 32738)
 
     visit '/login'
 
@@ -146,5 +148,50 @@ RSpec.describe 'As a default user' do
     visit '/profile'
 
     expect(page).to_not have_link('Your Orders')
+  end
+
+  it 'shows all currently saved addresses' do
+    visit '/profile'
+
+    within '#address-home' do
+      expect(page).to have_content(@user.address)
+      expect(page).to have_content(@user.city)
+      expect(page).to have_content(@user.state)
+      expect(page).to have_content(@user.zip)
+    end
+
+    within "#address-#{@address_2.id}" do
+      expect(page).to have_content(@address_2.nickname)
+      expect(page).to have_content(@address_2.street)
+      expect(page).to have_content(@address_2.city)
+      expect(page).to have_content(@address_2.state)
+      expect(page).to have_content(@address_2.zip)
+    end
+
+    within "#address-#{@address_3.id}" do
+      expect(page).to have_content(@address_3.nickname)
+      expect(page).to have_content(@address_3.street)
+      expect(page).to have_content(@address_3.city)
+      expect(page).to have_content(@address_3.state)
+      expect(page).to have_content(@address_3.zip)
+    end
+  end
+
+  it 'shows a link to edit each address' do
+    visit '/profile'
+
+    within "#address-#{@address_2.id}" do
+      expect(page).to have_link('Edit')
+    end
+
+    within "#address-#{@address_3.id}" do
+      expect(page).to have_link('Edit')
+    end
+  end
+
+  it 'shows a link to add a new address' do
+    visit '/profile'
+
+    expect(page).to have_link('Add New Address')
   end
 end
