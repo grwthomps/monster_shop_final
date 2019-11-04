@@ -128,8 +128,8 @@ lynda = User.create(
   state: "AZ",
   zip: 85736,
   email: "lferguson@gmail.com",
-  password: "password1",
-  password_confirmation: "password1"
+  password: "password",
+  password_confirmation: "password"
 )
 merchant_employee = florist.users.create(
   name: "Lael Whipple",
@@ -138,8 +138,8 @@ merchant_employee = florist.users.create(
   state: "TN",
   zip: 37966,
   email: "whip_whipple@yahoo.com",
-  password: "password12",
-  password_confirmation: "password12",
+  password: "password",
+  password_confirmation: "password",
   role: 1
 )
 merchant_admin = pine_oakio.users.create(
@@ -149,8 +149,8 @@ merchant_admin = pine_oakio.users.create(
   state: "MT",
   zip: 59716,
   email: "bigskyguy@aol.com",
-  password: "password123",
-  password_confirmation: "password123",
+  password: "password",
+  password_confirmation: "password",
   role: 2
 )
 admin = User.create(
@@ -160,9 +160,54 @@ admin = User.create(
   state: "LA", zip:
   70032,
   email: "ouibouchard@gmail.fr",
-  password: "password1234",
-  password_confirmation: "password1234",
+  password: "password",
+  password_confirmation: "password",
   role:3
+)
+
+#---------------------------- Addresses ----------------------------#
+
+lynda.addresses.create(
+  nickname: 'Work',
+  street: '261 Andover Blvd',
+  city: 'Durham',
+  state: 'NC',
+  zip: 27703
+)
+lynda.addresses.create(
+  nickname: 'Mom & Dad',
+  street: '598 Fieldstone Dr',
+  city: 'Anoka',
+  state: 'MN',
+  zip: 55303
+)
+merchant_employee.addresses.create(
+  nickname: 'Work',
+  street: '8543 Market St',
+  city: 'Yorktown',
+  state: 'VA',
+  zip: 23693
+)
+merchant_employee.addresses.create(
+  nickname: 'Bob\'s House',
+  street: '9462 Sugar St',
+  city: 'Decatur',
+  state: 'GA',
+  zip: 30030
+)
+merchant_admin.addresses.create(
+  nickname: 'Work',
+  street: '40 E. Smoky Hollow Dr',
+  city: 'Pikesville',
+  state: 'MD',
+  zip: 21208
+)
+merchant_admin.addresses.create(
+  nickname: 'Jim\'s Place',
+  street: '7195 Cambridge St',
+  city: 'Ottawa',
+  state: 'IL',
+  zip: 61350
 )
 
 #---------------------------- Orders ----------------------------#
