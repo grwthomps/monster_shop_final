@@ -30,11 +30,11 @@ Rails.application.routes.draw do
   get '/profile/addresses/:id/edit', to: 'addresses#edit'
   patch '/profile/addresses/:id', to: 'addresses#update'
   delete '/profile/addresses/:id', to: 'addresses#destroy'
+  get '/profile/addresses/new', to: 'addresses#new'
+  post '/profile/addresses', to: 'addresses#create'
+
   get '/register', to: 'users#new'
   post '/users', to: 'users#create'
-  get '/profile/edit', to: 'users#edit'
-  patch '/profile', to: 'users#update'
-  patch '/profile/orders/:id', to: 'user_orders#update'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     resources :items, except: [:show]
 
     root 'dashboard#index'
-    
+
     get '/orders/:id', to: 'orders#show'
     patch '/orders/:order_id/item_orders/:item_order_id', to: 'orders#update'
   end
