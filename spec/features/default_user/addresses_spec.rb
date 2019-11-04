@@ -88,3 +88,43 @@ RSpec.describe 'As a default user', type: :feature do
     expect(page).to_not have_content(32738)
   end
 
+  it 'can create a new address' do
+    click_link 'Add New Address'
+
+    expect(current_path).to eq('/profile/addresses/new')
+
+    fill_in 'Nickname', with: 'Rental'
+    fill_in 'Street', with: '8813 Taylor Rd'
+    fill_in 'City', with: 'Harvey'
+    fill_in 'State', with: 'IL'
+    fill_in 'Zip', with: 60426
+
+    click_button 'Create Address'
+
+    expect(current_path).to eq('/profile')
+
+    expect(page).to have_content('Rental')
+    expect(page).to have_content('8813 Taylor Rd')
+    expect(page).to have_content('Harvey')
+    expect(page).to have_content('IL')
+    expect(page).to have_content(60426)
+  end
+
+  it 'previously entered info persists through error during address creation' do
+    click_link 'Add New Address'
+
+    fill_in 'Nickname', with: 'Rental'
+    fill_in 'City', with: 'Harvey'
+
+    click_button 'Create Address'
+
+    expect(current_path).to eq('/profile/addresses')
+
+    expect(page).to have_content("Street can't be blank")
+    expect(page).to have_content("State can't be blank")
+    expect(page).to have_content("Zip can't be blank")
+
+    expect(page).to have_selector("input[value='Rental']")
+    expect(page).to have_selector("input[value='Harvey']")
+  end
+end
