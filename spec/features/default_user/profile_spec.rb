@@ -177,15 +177,17 @@ RSpec.describe 'As a default user' do
     end
   end
 
-  it 'shows a link to edit each address' do
+  it 'shows links to edit and delete each address' do
     visit '/profile'
 
     within "#address-#{@address_2.id}" do
       expect(page).to have_link('Edit')
+      expect(page).to have_link('Delete')
     end
 
     within "#address-#{@address_3.id}" do
       expect(page).to have_link('Edit')
+      expect(page).to have_link('Delete')
     end
   end
 
