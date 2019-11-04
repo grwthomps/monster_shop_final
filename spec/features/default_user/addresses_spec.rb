@@ -74,3 +74,17 @@ RSpec.describe 'As a default user', type: :feature do
     expect(page).to have_content("Zip can't be blank")
   end
 
+  it 'can delete an address' do
+    within "#address-#{@address_3.id}" do
+      click_link 'Delete'
+    end
+
+    expect(current_path).to eq('/profile')
+
+    expect(page).to_not have_css("#address-#{@address_3.id}")
+    expect(page).to_not have_content('101 Sixma Ave')
+    expect(page).to_not have_content('Deltona')
+    expect(page).to_not have_content('FL')
+    expect(page).to_not have_content(32738)
+  end
+
