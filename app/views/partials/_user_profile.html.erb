@@ -34,14 +34,16 @@
     <%= link_to 'Your Orders', user_orders_path, class: 'btn btn-success ml-2 mr-2' %>
   <% end %>
   <% if !admin %>
-    <%= link_to 'Add New Address', '', class: 'btn btn-primary ml-2 mr-2' %>
     <%= link_to 'Edit Your Info', '/profile/edit', class: 'btn btn-primary ml-2 mr-2' %>
     <%= link_to 'Change Your Password', '/profile/edit?info=false', class: 'btn btn-danger ml-2 mr-2' %>
   <% end %>
 </article>
 
 <% if !current_user.admin? %>
-  <h1 class="mt-4 text-center">Your Addresses</h1>
+  <div class="text-center mt-4">
+    <h1>Your Addresses</h1>
+    <%= link_to 'Add New Address', '', class: 'btn btn-primary mt-2 mb-2' %>
+  </div>
   <section class="container-fluid row justify-content-center">
     <section class = "card card-body bg-light m-3 p-4 col-md-3" id= 'address-home'>
       <h2 class="text-center">Home</h2>
