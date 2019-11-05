@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Admin order shipment' do
   before :each do
-    @user = User.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "user@gmail.com", password: "password123", password_confirmation: "password123")
+    @user = User.create!(name: "Andy Dwyer", email: "user@gmail.com", password: "password123", password_confirmation: "password123")
 
     @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd', city: 'Denver', state: 'CO', zip: 80203)
     @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd', city: 'Denver', state: 'CO', zip: 80203)
@@ -16,7 +16,7 @@ RSpec.describe 'Admin order shipment' do
     @order_1.item_orders.create!(item_id: @paper.id, price: @paper.price, quantity: 1, status: 1)
     @order_2.item_orders.create!(item_id: @pencil.id, price: @pencil.price, quantity: 3)
 
-    @admin = User.create!(name: "Harry", address: "123 Cherry St", city: "Augusta", state: "ME", zip: 23840, email: "admin@gmail.com", password: "password123", password_confirmation: "password123", role: 3)
+    @admin = User.create!(name: "Harry", email: "admin@gmail.com", password: "password123", password_confirmation: "password123", role: 3)
 
     visit '/login'
 
@@ -25,7 +25,7 @@ RSpec.describe 'Admin order shipment' do
 
     click_button 'Login'
   end
-  
+
   it 'can see packaged orders that are ready to ship' do
     visit '/admin'
 

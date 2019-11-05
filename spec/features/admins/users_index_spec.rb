@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Users Index Page', type: :feature do
   it 'can show all users' do
-    user_1 = User.create!(name: "Andy Dwyer", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password", password_confirmation: "password")
-    user_2 = User.create!(name: "April Ludgate", address: "456 Jefferson Ave", city: "Orlando", state: "FL", zip: 32810, email: "test@hotmail.com", password: "password", password_confirmation: "password")
-    user_3 = User.create!(name: "Tom Haverford", address: "1011 Adams Circle", city: "Portland", state: "OR", zip: 89325, email: "test@outlook.com", password: "password", password_confirmation: "password")
-    admin = User.create!(name: "Ron Swanson", address: "789 Washington Blvd", city: "New Orleans", state: "LA", zip: 70010, email: "test@aol.com", password: "password", password_confirmation: "password", role: 3)
+    user_1 = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password", password_confirmation: "password")
+    user_2 = User.create!(name: "April Ludgate", email: "test@hotmail.com", password: "password", password_confirmation: "password")
+    user_3 = User.create!(name: "Tom Haverford", email: "test@outlook.com", password: "password", password_confirmation: "password")
+    admin = User.create!(name: "Ron Swanson", email: "test@aol.com", password: "password", password_confirmation: "password", role: 3)
 
     visit '/login'
 
@@ -40,8 +40,8 @@ RSpec.describe 'Admin Users Index Page', type: :feature do
   end
 
   it 'has user names that link to admin user show page' do
-    user = User.create!(name: "Andy Dwyer", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password", password_confirmation: "password")
-    admin = User.create!(name: "Ron Swanson", address: "789 Washington Blvd", city: "New Orleans", state: "LA", zip: 70010, email: "test@aol.com", password: "password", password_confirmation: "password", role: 3)
+    user = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password", password_confirmation: "password")
+    admin = User.create!(name: "Ron Swanson", email: "test@aol.com", password: "password", password_confirmation: "password", role: 3)
 
     visit '/login'
 
@@ -58,10 +58,10 @@ RSpec.describe 'Admin Users Index Page', type: :feature do
   end
 
   it 'cannot be accessed by other user types' do
-    user = User.create!(name: "Andy Dwyer", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password", password_confirmation: "password")
+    user = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password", password_confirmation: "password")
     florist = Merchant.create(name: 'Florist Gump', address: '1523 N Main Street', city: 'Plaintree', state: 'MN', zip: 49155)
-    merchant_employee = florist.users.create(name: "Lael Whipple", address: "7392 Oklahoma Ave", city: "Nashville", state: "TN", zip: 37966, email: "whip_whipple@yahoo.com", password: "password12", password_confirmation: "password12", role: 1)
-    merchant_admin = florist.users.create(name: "Dudley Laughlin", address: "2348 Willow Dr", city: "Big Sky", state: "MT", zip: 59716, email: "bigskyguy@aol.com", password: "password123", password_confirmation: "password123", role: 2)
+    merchant_employee = florist.users.create(name: "Lael Whipple", email: "whip_whipple@yahoo.com", password: "password12", password_confirmation: "password12", role: 1)
+    merchant_admin = florist.users.create(name: "Dudley Laughlin", email: "bigskyguy@aol.com", password: "password123", password_confirmation: "password123", role: 2)
 
     visit '/login'
     fill_in :email, with: 'test@gmail.com'

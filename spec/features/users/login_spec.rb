@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'User login page' do
   describe 'default user' do
     before :each do
-      @user = User.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123")
+      @user = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123")
     end
     it 'needs to login with valid credentials' do
       visit '/login'
@@ -56,8 +56,8 @@ RSpec.describe 'User login page' do
   describe 'merchant user' do
     before :each do
       @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd', city: 'Denver', state: 'CO', zip: 80203)
-      @employee = @meg.users.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test1@gmail.com", password: "password123", password_confirmation: "password123", role: 1)
-      @admin = @meg.users.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 2)
+      @employee = @meg.users.create!(name: "Andy Dwyer", email: "test1@gmail.com", password: "password123", password_confirmation: "password123", role: 1)
+      @admin = @meg.users.create!(name: "Ron Swanson", email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 2)
     end
     it 'employee needs to login with valid credentials' do
       visit '/login'
@@ -116,7 +116,7 @@ RSpec.describe 'User login page' do
 
   describe 'admin' do
     before :each do
-      @admin = User.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 3)
+      @admin = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 3)
     end
     it 'needs to login with valid credentials' do
       visit '/login'

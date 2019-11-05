@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'When I visit an order show page as a merchant employee' do
   before :each do
-    @user = User.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123")
+    @user = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123")
 
     @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd', city: 'Denver', state: 'CO', zip: 80203)
     @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd', city: 'Denver', state: 'CO', zip: 80203)
@@ -15,8 +15,8 @@ RSpec.describe 'When I visit an order show page as a merchant employee' do
     @order.item_orders.create!(item_id: @pencil.id, price: @pencil.price, quantity: 104)
     @order.item_orders.create!(item_id: @paper.id, price: @paper.price, quantity: 3)
 
-    @mike.users.create!(name: "Harry", address: "123 Cherry St", city: "Augusta", state: "ME", zip: 23840, email: "test1@gmail.com", password: "password123", password_confirmation: "password123", role: 1)
-    @meg.users.create!(name: "Harry", address: "123 Cherry St", city: "Augusta", state: "ME", zip: 23840, email: "test2@gmail.com", password: "password123", password_confirmation: "password123", role: 1)
+    @mike.users.create!(name: "Harry", email: "test1@gmail.com", password: "password123", password_confirmation: "password123", role: 1)
+    @meg.users.create!(name: "Harry", email: "test2@gmail.com", password: "password123", password_confirmation: "password123", role: 1)
 
     visit '/login'
 
@@ -32,7 +32,7 @@ RSpec.describe 'When I visit an order show page as a merchant employee' do
     expect(current_path).to eq("/merchant/orders/#{@order.id}")
 
     within '#customer-info' do
-      expect(page).to have_content('Gmoney')
+      expect(page).to have_content('Andy Dwyer')
       expect(page).to have_content("123 Lincoln St Denver, CO 23840")
     end
 

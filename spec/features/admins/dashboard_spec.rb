@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Admin dashboard page', type: :feature do
   before :each do
-    @user_1 = User.create!(name: "Andy Dwyer", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password", password_confirmation: "password")
-    @user_2 = User.create!(name: "April Ludgate", address: "456 Jefferson Ave", city: "Orlando", state: "FL", zip: 32810, email: "test@hotmail.com", password: "password", password_confirmation: "password")
-    @admin = User.create!(name: "Ron Swanson", address: "789 Washington Blvd", city: "New Orleans", state: "LA", zip: 70010, email: "test@aol.com", password: "password", password_confirmation: "password", role: 3)
+    @user_1 = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password", password_confirmation: "password")
+    @user_2 = User.create!(name: "April Ludgate", email: "test@hotmail.com", password: "password", password_confirmation: "password")
+    @admin = User.create!(name: "Ron Swanson", email: "test@aol.com", password: "password", password_confirmation: "password", role: 3)
 
     @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd', city: 'Denver', state: 'CO', zip: 80203)
     @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd', city: 'Denver', state: 'CO', zip: 80203)
