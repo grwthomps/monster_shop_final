@@ -1,10 +1,10 @@
 class AddressesController < ApplicationController
   def edit
-    @address = Address.find(params[:id])
+    @address = current_user.addresses.find(params[:id])
   end
 
   def update
-    @address = Address.find(params[:id])
+    @address = current_user.addresses.find(params[:id])
     @address.update(address_params)
     if @address.save
       redirect_to '/profile'
@@ -16,7 +16,7 @@ class AddressesController < ApplicationController
   end
 
   def destroy
-    address = Address.find(params[:id])
+    address = current_user.addresses.find(params[:id])
     address.destroy
     flash[:success] = ["#{address.nickname} address has been successfully deleted"]
     redirect_to '/profile'
