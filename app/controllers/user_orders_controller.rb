@@ -1,6 +1,10 @@
 class UserOrdersController < ApplicationController
   before_action :require_user
 
+  def new
+    @items = cart.items
+  end
+
   def index
     @orders = current_user.orders
   end
