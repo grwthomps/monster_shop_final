@@ -23,26 +23,29 @@
   <% end %>
 </article>
 
-<% if !current_user.admin? %>
-  <div class="text-center mt-4">
-    <h1>Your Addresses</h1>
+
+<div class="text-center mt-4">
+  <h1>Your Addresses</h1>
+  <% if !admin %>
     <%= link_to 'Add New Address', '/profile/addresses/new', class: 'btn btn-primary mt-2 mb-2' %>
-  </div>
-  <section class="container-fluid row justify-content-center">
-    <% @user.addresses.each do |address| %>
-      <section class = "card card-body bg-light m-3 p-4 col-md-3" id= 'address-<%=address.id%>'>
-        <h2 class="text-center"> <%= address.nickname %> </h2>
-        <p>Street: <%= address.street %></p>
-        <p>City: <%= address.city %></p>
-        <p>State: <%= address.state %></p>
-        <p>Zip: <%= address.zip %></p>
-        <% if address.no_orders? %>
-          <article class="justify-content-center row mt-2">
-            <%= link_to 'Edit', "/profile/addresses/#{address.id}/edit", class: 'btn btn-primary ml-2 mr-2' %>
-            <%= link_to 'Delete', "/profile/addresses/#{address.id}", method: :delete, class: 'btn btn-danger ml-2 mr-2' %>
-          </article>
+  <% end %>
+</div>
+<section class="container-fluid row justify-content-center">
+  <% @user.addresses.each do |address| %>
+    <section class = "card card-body bg-light m-3 p-4 col-md-3" id= 'address-<%=address.id%>'>
+      <h2 class="text-center"> <%= address.nickname %> </h2>
+      <p>Street: <%= address.street %></p>
+      <p>City: <%= address.city %></p>
+      <p>State: <%= address.state %></p>
+      <p>Zip: <%= address.zip %></p>
+      <article class="justify-content-center row mt-2">
+        <% if address.no_shipped_orders? && !admin %>
+          <%= link_to 'Edit', "/profile/addresses/#{address.id}/edit", class: 'btn btn-primary ml-2 mr-2' %>
         <% end %>
-      </section>
-    <% end %>
-  </section>
-<% end %>
+        <% if !address.any_orders? && !admin %>
+          <%= link_to 'Delete', "/profile/addresses/#{address.id}", method: :delete, class: 'btn btn-danger ml-2 mr-2' %>
+        <% end %>
+      </article>
+    </section>
+  <% end %>
+</section>
