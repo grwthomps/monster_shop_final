@@ -16,11 +16,14 @@ RSpec.describe 'merchant show page', type: :feature do
       @pull_toy = @brian.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
       @dog_bone = @brian.items.create(name: "Dog Bone", description: "They'll love it!", price: 20, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 21)
 
-      @user = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123")
-      @user_1 = User.create!(name: "Ron Swanson", email: "test1@gmail.com", password: "password123", password_confirmation: "password123")
-      @order_1 = Order.create!(user_id: @user.id)
-      @order_2 = Order.create!(user_id: @user_1.id)
-      @order_3 = Order.create!(user_id: @user.id)
+      @user_1 = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123")
+      @address_1 = @user_1.addresses.create!(nickname: 'Work', street: "478 Hanover Blvd", city: "Portland", state: "CO", zip: 80128)
+      @user_2 = User.create!(name: "Ron Swanson", email: "test1@gmail.com", password: "password123", password_confirmation: "password123")
+      @address_2 = @user_2.addresses.create!(nickname: 'Work', street: "478 Hanover Blvd", city: "Denver", state: "CO", zip: 80128)
+
+      @order_1 = Order.create!(user_id: @user_1.id, address_id: @address_1.id)
+      @order_2 = Order.create!(user_id: @user_2.id, address_id: @address_2.id)
+      @order_3 = Order.create!(user_id: @user_1.id, address_id: @address_1.id)
 
       @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
       @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
@@ -38,7 +41,7 @@ RSpec.describe 'merchant show page', type: :feature do
         expect(page).to have_content("Average Price of Items: $15")
         within ".distinct-cities" do
           expect(page).to have_content("Cities that order these items:")
-          expect(page).to have_content("Hershey")
+          expect(page).to have_content("Portland")
           expect(page).to have_content("Denver")
         end
       end

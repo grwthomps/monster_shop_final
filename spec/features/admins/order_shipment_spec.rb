@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Admin order shipment' do
   before :each do
     @user = User.create!(name: "Andy Dwyer", email: "user@gmail.com", password: "password123", password_confirmation: "password123")
+    @address_1 = @user.addresses.create!(nickname: 'Work', street: "478 Hanover Blvd", city: "Denver", state: "CO", zip: 80128)
 
     @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd', city: 'Denver', state: 'CO', zip: 80203)
     @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd', city: 'Denver', state: 'CO', zip: 80203)
@@ -10,8 +11,8 @@ RSpec.describe 'Admin order shipment' do
     @paper = @mike.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 3)
     @pencil = @mike.items.create(name: "Yellow Pencil", description: "You can write on paper with it!", price: 2, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
 
-    @order_1 = @user.orders.create!(status: 0)
-    @order_2 = @user.orders.create!
+    @order_1 = @user.orders.create!(address_id: @address_1.id, status: 0)
+    @order_2 = @user.orders.create!(address_id: @address_1.id)
     @order_1.item_orders.create!(item_id: @tire.id, price: @tire.price, quantity: 2, status: 1)
     @order_1.item_orders.create!(item_id: @paper.id, price: @paper.price, quantity: 1, status: 1)
     @order_2.item_orders.create!(item_id: @pencil.id, price: @pencil.price, quantity: 3)

@@ -80,7 +80,8 @@ RSpec.describe "Items Index Page" do
       @dog_bowl = @brian.items.create(name: "Dog Bowl", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", inventory: 21)
 
       @user = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123")
-      @order_1 = Order.create!(user_id: @user.id)
+      @address = @user.addresses.create!(nickname: 'Work', street: "478 Hanover Blvd", city: "Denver", state: "CO", zip: 80128)
+      @order_1 = Order.create!(user_id: @user.id, address_id: @address.id)
 
       @order_1.item_orders.create!(item_id: @chain.id, price: @chain.price, quantity: 7)
       @order_1.item_orders.create!(item_id: @dog_bowl.id, price: @dog_bowl.price, quantity: 6)

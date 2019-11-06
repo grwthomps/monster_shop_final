@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Admin User Show Page', type: :feature do
   before :each do
     @user = User.create!(name: "Andy Dwyer", email: "user@gmail.com", password: "password", password_confirmation: "password")
-    @user.orders.create!
+    @address_1 = @user.addresses.create!(nickname: 'Work', street: "478 Hanover Blvd", city: "Denver", state: "CO", zip: 80128)
+    @user.orders.create!(address_id: @address_1.id)
     @admin = User.create!(name: "Ron Swanson", email: "admin@gmail.com", password: "password", password_confirmation: "password", role: 3)
 
     visit '/login'
@@ -19,10 +20,6 @@ RSpec.describe 'Admin User Show Page', type: :feature do
 
     within '.profile-info' do
       expect(page).to have_content(@user.name)
-      expect(page).to have_content(@user.address)
-      expect(page).to have_content(@user.city)
-      expect(page).to have_content(@user.state)
-      expect(page).to have_content(@user.zip)
       expect(page).to have_content(@user.email)
     end
 

@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe "Cancel Order" do
   before :each do
     @user = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123")
+    @address_1 = @user.addresses.create!(nickname: 'Work', street: "478 Hanover Blvd", city: "Denver", state: "CO", zip: 80128)
+
     visit '/login'
     fill_in :email, with: 'test@gmail.com'
     fill_in :password, with: 'password123'
@@ -13,7 +15,7 @@ RSpec.describe "Cancel Order" do
     @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
     @paper = @mike.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 3)
 
-    @order_1 = Order.create!(user_id: @user.id)
+    @order_1 = Order.create!(user_id: @user.id, address_id: @address_1.id)
     @item_order_1 = @order_1.item_orders.create!(item_id: @tire.id, price: @tire.price, quantity: 2, status: 1)
     @item_order_2 = @order_1.item_orders.create!(item_id: @paper.id, price: @paper.price, quantity: 1)
   end
