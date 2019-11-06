@@ -23,6 +23,33 @@
   </tbody>
 </table>
 
+<h2 class="text-center mb-4 mt-5">Shipping Address</h2>
+<table class="table table-striped table-bordered cart-table">
+  <thead>
+    <tr>
+      <th scope="col">Nickname</th>
+      <th scope="col">Street</th>
+      <th scope="col">City</th>
+      <th scope="col">State</th>
+      <th scope="col">Zip</th>
+      <% if @order.status != 'shipped' && !current_user.admin? %>
+        <th scope="col"></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id='shipping-address'>
+      <td><%= @order.address.nickname %></td>
+      <td><%= @order.address.street %></td>
+      <td><%= @order.address.city %></td>
+      <td><%= @order.address.state %></td>
+      <td><%= @order.address.zip %></td>
+      <% if @order.status != 'shipped' && !current_user.admin? %>
+        <td align="center"><%= link_to 'Change Address', "/profile/addresses/#{@order.address.id}/edit", class: 'btn btn-danger' %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
 
 <h2 class="text-center mb-4 mt-5">Item Details</h2>
 

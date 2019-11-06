@@ -1,6 +1,10 @@
 class AddressesController < ApplicationController
   def edit
     @address = current_user.addresses.find(params[:id])
+    if !@address.no_orders?
+      flash[:error] = ['Addresses with orders that have been shipped cannot be edited or deleted']
+      redirect_to '/profile'
+    end
   end
 
   def update

@@ -153,13 +153,6 @@ RSpec.describe 'As a default user' do
   it 'shows all currently saved addresses' do
     visit '/profile'
 
-    within '#address-home' do
-      expect(page).to have_content(@user.address)
-      expect(page).to have_content(@user.city)
-      expect(page).to have_content(@user.state)
-      expect(page).to have_content(@user.zip)
-    end
-
     within "#address-#{@address_2.id}" do
       expect(page).to have_content(@address_2.nickname)
       expect(page).to have_content(@address_2.street)
@@ -180,11 +173,6 @@ RSpec.describe 'As a default user' do
   it 'shows links to edit and delete each address' do
     visit '/profile'
 
-    within '#address-home' do
-      expect(page).to have_link('Edit')
-      expect(page).to_not have_link('Delete')
-    end
-
     within "#address-#{@address_2.id}" do
       expect(page).to have_link('Edit')
       expect(page).to have_link('Delete')
@@ -193,6 +181,17 @@ RSpec.describe 'As a default user' do
     within "#address-#{@address_3.id}" do
       expect(page).to have_link('Edit')
       expect(page).to have_link('Delete')
+    end
+  end
+
+  it 'does not show links to edit or delete addresses that have shipped orders' do
+    Order.create(user_id: @user.id, address_id: @address_2.id, status: 2)
+
+    visit '/profile'
+
+    within "#address-#{@address_2.id}" do
+      expect(page).to_not have_link('Edit')
+      expect(page).to_not have_link('Delete')
     end
   end
 

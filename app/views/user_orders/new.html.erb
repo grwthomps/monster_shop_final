@@ -38,34 +38,26 @@
   <%= link_to 'Edit Cart', '/cart', class: 'btn btn-primary ml-2 mr-2' %>
 </article>
 
-<h1 class="mt-4 mb-4">Select Shipping Address</h1>
+<% if !current_user.addresses.any? %>
+  <p class="text-center">You must <%= link_to 'add an address', '/profile/addresses/new' %> prior to placing an order. </p>
+<% else %>
+  <h2 class="text-center mt-4 mb-4">Select Shipping Address</h2>
 
-<section class="container-fluid row justify-content-center">
-  <section class = "card card-body bg-light m-3 p-4 col-md-3" id= 'address-home'>
-    <h2 class="text-center">Home</h2>
-    <p>Street: <%= current_user.address %></p>
-    <p>City: <%= current_user.city %></p>
-    <p>State: <%= current_user.state %></p>
-    <p>Zip: <%= current_user.zip %></p>
-    <article class="justify-content-center row mt-2">
-      <%= link_to 'Edit', '/profile/edit', class: 'btn btn-primary ml-2 mr-2' %>
-      <%= link_to 'Ship to this Address', "/profile/orders", method: :post, class: 'btn btn-success ml-2 mr-2' %>
-    </article>
-  </section>
-
-  <% current_user.addresses.each do |address| %>
-    <section id="address-#{address.id}">
+  <section class="container-fluid row justify-content-center">
+    <% current_user.addresses.each do |address| %>
       <section class = "card card-body bg-light m-3 p-4 col-md-3" id= 'address-<%=address.id%>'>
-        <h2 class="text-center"> <%= address.nickname %> </h2>
-        <p>Street: <%= address.street %></p>
-        <p>City: <%= address.city %></p>
-        <p>State: <%= address.state %></p>
-        <p>Zip: <%= address.zip %></p>
-        <article class="justify-content-center row mt-2">
-          <%= link_to 'Edit', "/profile/addresses/#{address.id}/edit", class: 'btn btn-primary ml-2 mr-2' %>
-          <%= link_to 'Ship to this Address', '/profile/orders', method: :post, class: 'btn btn-success ml-2 mr-2' %>
-        </article>
+        <section id="address-#{address.id}">
+          <h2 class="text-center"> <%= address.nickname %> </h2>
+          <p>Street: <%= address.street %></p>
+          <p>City: <%= address.city %></p>
+          <p>State: <%= address.state %></p>
+          <p>Zip: <%= address.zip %></p>
+          <article class="justify-content-center row mt-2">
+            <%= link_to 'Edit', "/profile/addresses/#{address.id}/edit", class: 'btn btn-primary ml-2 mr-2' %>
+            <%= link_to 'Ship to this Address', "/profile/orders/#{address.id}", method: :post, class: 'btn btn-success ml-2 mr-2' %>
+          </article>
+        </section>
       </section>
-    </section>
-  <% end %>
-</section>
+    <% end %>
+  </section>
+<% end %>
