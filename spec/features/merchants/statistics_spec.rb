@@ -16,8 +16,8 @@ RSpec.describe 'merchant show page', type: :feature do
       @pull_toy = @brian.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
       @dog_bone = @brian.items.create(name: "Dog Bone", description: "They'll love it!", price: 20, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 21)
 
-      @user = User.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123")
-      @user_1 = User.create!(name: "Gmoney", address: "123 Lincoln St", city: "Hershey", state: "CO", zip: 23840, email: "test1@gmail.com", password: "password123", password_confirmation: "password123")
+      @user = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123")
+      @user_1 = User.create!(name: "Ron Swanson", email: "test1@gmail.com", password: "password123", password_confirmation: "password123")
       @order_1 = Order.create!(user_id: @user.id)
       @order_2 = Order.create!(user_id: @user_1.id)
       @order_3 = Order.create!(user_id: @user.id)

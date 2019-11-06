@@ -39,10 +39,6 @@ RSpec.describe "As an admin user" do
     )
     @admin = User.create(
       name: "Dorian Bouchard",
-      address: "7890 Montreal Blvd",
-      city: "New Orleans",
-      state: "LA", zip:
-      70032,
       email: "ouibouchard@gmail.fr",
       password: "password1234",
       password_confirmation: "password1234",
@@ -108,10 +104,6 @@ describe "As a default user" do
     )
     @cynthia = User.create(
       name: 'Cynthia Hall',
-      address: '9247 E 42nd Avenue',
-      city: 'Rochester',
-      state: 'NY',
-      zip: '48231',
       email: "cynthiahall@hotmail.com",
       password: "password",
       password_confirmation: "password"

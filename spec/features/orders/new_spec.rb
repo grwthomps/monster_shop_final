@@ -7,14 +7,14 @@ RSpec.describe("Order Creation") do
       @paper = @mike.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 3)
       @pencil = @mike.items.create(name: "Yellow Pencil", description: "You can write on paper with it!", price: 2, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
 
-      @user = User.create!(name: "Kay Russell", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123")
+      @user = User.create!(name: "Kay Russell", email: "test@gmail.com", password: "password123", password_confirmation: "password123")
       @address_2 = @user.addresses.create!(nickname: 'Work', street: "478 Hanover Blvd", city: "Denver", state: "CO", zip: 80128)
-      @address_3 = @user.addresses.create!(nickname: 'Rental, street: "101 Sixma Ave", city: "Deltona", state: "FL", zip: 32738)
+      @address_3 = @user.addresses.create!(nickname: 'Rental', street: "101 Sixma Ave", city: "Deltona", state: "FL", zip: 32738)
 
-      visit '/login'
-      fill_in :email, with: 'test@gmail.com'
-      fill_in :password, with: 'password123'
-      click_button 'Login'
+      visit "/login"
+      fill_in :email, with: "test@gmail.com"
+      fill_in :password, with: "password123"
+      click_button "Login"
 
       visit "/items/#{@paper.id}"
       click_on "Add Item to Cart"

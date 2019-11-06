@@ -5,7 +5,7 @@ RSpec.describe 'Merchant Items Edit Page', type: :feature do
     @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
     @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
 
-    @merchant_admin = @meg.users.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 2)
+    @merchant_admin = @meg.users.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 2)
 
     visit '/login'
 

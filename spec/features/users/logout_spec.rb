@@ -4,7 +4,7 @@ RSpec.describe 'User logout' do
 
   describe 'default user' do
     before :each do
-      @user = User.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123")
+      @user = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123")
 
       visit '/login'
 
@@ -18,7 +18,7 @@ RSpec.describe 'User logout' do
       visit '/logout'
 
       expect(current_path).to eq('/')
-      expect(page).to have_content('Gmoney, you have logged out!')
+      expect(page).to have_content('Andy Dwyer, you have logged out!')
 
       within 'nav' do
         expect(page).to have_link('Login')
@@ -31,7 +31,7 @@ RSpec.describe 'User logout' do
       within('nav') { click_link('Logout') }
 
       expect(current_path).to eq('/')
-      expect(page).to have_content('Gmoney, you have logged out!')
+      expect(page).to have_content('Andy Dwyer, you have logged out!')
 
       within 'nav' do
         expect(page).to have_link('Login')
@@ -58,7 +58,7 @@ RSpec.describe 'User logout' do
   describe 'merchant_employee' do
     before :each do
       @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd', city: 'Denver', state: 'CO', zip: 80203)
-      @merchant_employee = @meg.users.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 1)
+      @merchant_employee = @meg.users.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 1)
 
       visit '/login'
 
@@ -72,7 +72,7 @@ RSpec.describe 'User logout' do
       visit '/logout'
 
       expect(current_path).to eq('/')
-      expect(page).to have_content('Gmoney, you have logged out!')
+      expect(page).to have_content('Andy Dwyer, you have logged out!')
 
       within 'nav' do
         expect(page).to have_link('Login')
@@ -85,7 +85,7 @@ RSpec.describe 'User logout' do
       within('nav') { click_link('Logout') }
 
       expect(current_path).to eq('/')
-      expect(page).to have_content('Gmoney, you have logged out!')
+      expect(page).to have_content('Andy Dwyer, you have logged out!')
 
       within 'nav' do
         expect(page).to have_link('Login')
@@ -112,7 +112,7 @@ RSpec.describe 'User logout' do
   describe 'merchant admin' do
     before :each do
       @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd', city: 'Denver', state: 'CO', zip: 80203)
-      @merchant_admin = @meg.users.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 2)
+      @merchant_admin = @meg.users.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 2)
 
       visit '/login'
 
@@ -126,7 +126,7 @@ RSpec.describe 'User logout' do
       visit '/logout'
 
       expect(current_path).to eq('/')
-      expect(page).to have_content('Gmoney, you have logged out!')
+      expect(page).to have_content('Andy Dwyer, you have logged out!')
 
       within 'nav' do
         expect(page).to have_link('Login')
@@ -139,7 +139,7 @@ RSpec.describe 'User logout' do
       within('nav') { click_link('Logout') }
 
       expect(current_path).to eq('/')
-      expect(page).to have_content('Gmoney, you have logged out!')
+      expect(page).to have_content('Andy Dwyer, you have logged out!')
 
       within 'nav' do
         expect(page).to have_link('Login')
@@ -165,7 +165,7 @@ RSpec.describe 'User logout' do
 
   describe 'admin' do
     before :each do
-      @admin = User.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 3)
+      @admin = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 3)
 
       visit '/login'
 
@@ -179,7 +179,7 @@ RSpec.describe 'User logout' do
       visit '/logout'
 
       expect(current_path).to eq('/')
-      expect(page).to have_content('Gmoney, you have logged out!')
+      expect(page).to have_content('Andy Dwyer, you have logged out!')
 
       within 'nav' do
         expect(page).to have_link('Login')
@@ -192,7 +192,7 @@ RSpec.describe 'User logout' do
       within('nav') { click_link('Logout') }
 
       expect(current_path).to eq('/')
-      expect(page).to have_content('Gmoney, you have logged out!')
+      expect(page).to have_content('Andy Dwyer, you have logged out!')
 
       within 'nav' do
         expect(page).to have_link('Login')

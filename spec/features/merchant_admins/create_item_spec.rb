@@ -4,7 +4,7 @@ RSpec.describe 'Merchant Items Creation Page', type: :feature do
   before(:each) do
     @brian = Merchant.create(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
 
-    @merchant_admin = @brian.users.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 2)
+    @merchant_admin = @brian.users.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123", role: 2)
 
     visit '/login'
 

@@ -70,7 +70,7 @@ RSpec.describe "User registration form" do
   end
 
   it "prepopulates form fields after error message that email is not unique" do
-    User.create(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123")
+    User.create(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123")
 
     visit "/register"
 

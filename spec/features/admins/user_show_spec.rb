@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Admin User Show Page', type: :feature do
   before :each do
-    @user = User.create!(name: "Andy Dwyer", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "user@gmail.com", password: "password", password_confirmation: "password")
+    @user = User.create!(name: "Andy Dwyer", email: "user@gmail.com", password: "password", password_confirmation: "password")
     @user.orders.create!
-    @admin = User.create!(name: "Ron Swanson", address: "789 Washington Blvd", city: "New Orleans", state: "LA", zip: 70010, email: "admin@gmail.com", password: "password", password_confirmation: "password", role: 3)
+    @admin = User.create!(name: "Ron Swanson", email: "admin@gmail.com", password: "password", password_confirmation: "password", role: 3)
 
     visit '/login'
 

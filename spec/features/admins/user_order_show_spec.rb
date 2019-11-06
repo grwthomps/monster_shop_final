@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Order show page" do
   before :each do
-    @user = User.create!(name: "Brad Paisley", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "user@gmail.com", password: "password123", password_confirmation: "password123")
-    @admin = User.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "admin@gmail.com", password: "password123", password_confirmation: "password123", role: 3)
+    @user = User.create!(name: "Brad Paisley", email: "user@gmail.com", password: "password123", password_confirmation: "password123")
+    @admin = User.create!(name: "Andy Dwyer", email: "admin@gmail.com", password: "password123", password_confirmation: "password123", role: 3)
 
     @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd.', city: 'Denver', state: 'CO', zip: 80203)
     @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)

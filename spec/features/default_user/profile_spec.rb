@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'As a default user' do
   before :each do
-    @user = User.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123")
+    @user = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123")
     @address_2 = @user.addresses.create!(nickname: 'Work', street: "478 Hanover Blvd", city: "Denver", state: "CO", zip: 80128)
     @address_3 = @user.addresses.create!(nickname: 'Mom\'s', street: "101 Sixma Ave", city: "Deltona", state: "FL", zip: 32738)
 
@@ -35,7 +35,7 @@ RSpec.describe 'As a default user' do
 
     expect(current_path).to eq('/profile/edit')
 
-    expect(page).to have_selector("input[value='Gmoney']")
+    expect(page).to have_selector("input[value='Andy Dwyer']")
     expect(page).to have_selector("input[value='123 Lincoln St']")
     expect(page).to have_selector("input[value='Denver']")
     expect(page).to have_selector("input[value='CO']")
