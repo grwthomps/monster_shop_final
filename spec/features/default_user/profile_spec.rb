@@ -19,10 +19,6 @@ RSpec.describe 'As a default user' do
 
     within '.profile-info' do
       expect(page).to have_content(@user.name)
-      expect(page).to have_content(@user.address)
-      expect(page).to have_content(@user.city)
-      expect(page).to have_content(@user.state)
-      expect(page).to have_content(@user.zip)
       expect(page).to have_content(@user.email)
       expect(page).to_not have_content(@user.password)
     end
@@ -36,10 +32,6 @@ RSpec.describe 'As a default user' do
     expect(current_path).to eq('/profile/edit')
 
     expect(page).to have_selector("input[value='Andy Dwyer']")
-    expect(page).to have_selector("input[value='123 Lincoln St']")
-    expect(page).to have_selector("input[value='Denver']")
-    expect(page).to have_selector("input[value='CO']")
-    expect(page).to have_selector("input[value='23840']")
     expect(page).to have_selector("input[value='test@gmail.com']")
   end
 
@@ -47,10 +39,6 @@ RSpec.describe 'As a default user' do
     visit '/profile/edit'
 
     fill_in :name, with: 'Billy Bob'
-    fill_in :address, with: '542 Broadway St'
-    fill_in :city, with: 'Topeka'
-    fill_in :state, with: 'KS'
-    fill_in :zip, with: 54205
     fill_in :email, with: 'billy.bob@gmail.com'
 
     click_button 'Update Info'
@@ -60,10 +48,6 @@ RSpec.describe 'As a default user' do
 
     within '.profile-info' do
       expect(page).to have_content('Billy Bob')
-      expect(page).to have_content('542 Broadway St')
-      expect(page).to have_content('Topeka')
-      expect(page).to have_content('KS')
-      expect(page).to have_content(54205)
       expect(page).to have_content('billy.bob@gmail.com')
     end
   end
@@ -72,16 +56,12 @@ RSpec.describe 'As a default user' do
     visit '/profile/edit'
 
     fill_in :name, with: ''
-    fill_in :address, with: '542 Broadway St'
-    fill_in :city, with: ''
-    fill_in :state, with: 'KS'
-    fill_in :zip, with: 54205
     fill_in :email, with: 'billy.bob@gmail.com'
 
     click_button 'Update Info'
 
     expect(current_path).to eq('/profile')
-    expect(page).to have_content("Name can't be blank\nCity can't be blank")
+    expect(page).to have_content("Name can't be blank")
   end
 
 
@@ -134,7 +114,7 @@ RSpec.describe 'As a default user' do
     meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
     tire = meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
 
-    order_1 = Order.create!(user_id: @user.id)
+    order_1 = Order.create!(user_id: @user.id, address_id: @address_2.id)
     order_1.item_orders.create!(item_id: tire.id, price: tire.price, quantity: 2)
 
     visit '/profile'

@@ -3,17 +3,19 @@ require 'rails_helper'
 RSpec.describe 'Admin dashboard page', type: :feature do
   before :each do
     @user_1 = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password", password_confirmation: "password")
+    @address_1 = @user_1.addresses.create!(nickname: 'Work', street: "478 Hanover Blvd", city: "Denver", state: "CO", zip: 80128)
     @user_2 = User.create!(name: "April Ludgate", email: "test@hotmail.com", password: "password", password_confirmation: "password")
+    @address_2 = @user_2.addresses.create!(nickname: 'Home', street: "101 Sixma Ave", city: "Deltona", state: "FL", zip: 32738)
     @admin = User.create!(name: "Ron Swanson", email: "test@aol.com", password: "password", password_confirmation: "password", role: 3)
 
-    @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd', city: 'Denver', state: 'CO', zip: 80203)
-    @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd', city: 'Denver', state: 'CO', zip: 80203)
-    @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
-    @paper = @mike.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 4)
-    @pencil = @mike.items.create(name: "Yellow Pencil", description: "You can write on paper with it!", price: 2, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
+    @mike = Merchant.create!(name: "Mike's Print Shop", address: '123 Paper Rd', city: 'Denver', state: 'CO', zip: 80203)
+    @meg = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd', city: 'Denver', state: 'CO', zip: 80203)
+    @tire = @meg.items.create!(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+    @paper = @mike.items.create!(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 4)
+    @pencil = @mike.items.create!(name: "Yellow Pencil", description: "You can write on paper with it!", price: 2, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
 
-    @order_1 = Order.create!(user_id: @user_1.id)
-    @order_2 = Order.create!(user_id: @user_2.id, status: 0)
+    @order_1 = Order.create!(user_id: @user_1.id, address_id: @address_1.id)
+    @order_2 = Order.create!(user_id: @user_2.id, address_id: @address_2.id, status: 0)
     @order_1.item_orders.create!(item_id: @tire.id, price: @tire.price, quantity: 1)
     @order_1.item_orders.create!(item_id: @paper.id, price: @paper.price, quantity: 2)
     @order_2.item_orders.create!(item_id: @tire.id, price: @tire.price, quantity: 3)

@@ -9,10 +9,6 @@ RSpec.describe "User registration form" do
     expect(current_path).to eq("/register")
 
     fill_in :name, with: "Cowboy Joe"
-    fill_in :address, with: "123 Ranch Dr"
-    fill_in :city, with: "Austin"
-    fill_in :state, with: "Texas"
-    fill_in :zip, with: "78520"
     fill_in :email, with: "CowboyJoe@gmail.com"
     fill_in :password, with: "YeeHaw123"
     fill_in :password_confirmation, with: "YeeHaw123"
@@ -27,10 +23,6 @@ RSpec.describe "User registration form" do
     visit "/register"
 
     fill_in :name, with: "Cowboy Joe"
-    fill_in :address, with: "123 Ranch Dr"
-    fill_in :city, with: "Austin"
-    fill_in :state, with: "Texas"
-    fill_in :zip, with: "78520"
     fill_in :email, with: "CowboyJoe@gmail.com"
     fill_in :password, with: "YeeHaw123"
     fill_in :password_confirmation, with: "YeeHaw123"
@@ -49,10 +41,6 @@ RSpec.describe "User registration form" do
 
     # expect(current_path).to eq("/register")
     expect(page).to have_content("Name can't be blank")
-    expect(page).to have_content("Address can't be blank")
-    expect(page).to have_content("City can't be blank")
-    expect(page).to have_content("State can't be blank")
-    expect(page).to have_content("Zip can't be blank")
     expect(page).to have_content("Email can't be blank")
     expect(page).to have_content("Password can't be blank")
   end
@@ -75,10 +63,6 @@ RSpec.describe "User registration form" do
     visit "/register"
 
     fill_in :name, with: "Cowboy Joe"
-    fill_in :address, with: "123 Ranch Dr"
-    fill_in :city, with: "Austin"
-    fill_in :state, with: "Texas"
-    fill_in :zip, with: "78520"
     fill_in :email, with: "test@gmail.com"
     fill_in :password, with: "YeeHaw123"
     fill_in :password_confirmation, with: "YeeHaw123"
@@ -88,10 +72,6 @@ RSpec.describe "User registration form" do
     # expect(current_path).to eq("/register")
     expect(page).to have_content("Email has already been taken")
     expect(page).to have_selector("input[value='Cowboy Joe']")
-    expect(page).to have_selector("input[value='123 Ranch Dr']")
-    expect(page).to have_selector("input[value='Austin']")
-    expect(page).to have_selector("input[value='Texas']")
-    expect(page).to have_selector("input[value='78520']")
     expect(page).to_not have_selector("input[value='test@gmail.com']")
   end
 end

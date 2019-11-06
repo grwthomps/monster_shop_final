@@ -4,6 +4,8 @@ RSpec.describe "As a visitor" do
   describe "When I visit a merchant show page" do
     before :each do
       @user = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123")
+      @address = @user.addresses.create!(nickname: 'Work', street: "478 Hanover Blvd", city: "Denver", state: "CO", zip: 80128)
+
       visit '/login'
       fill_in :email, with: 'test@gmail.com'
       fill_in :password, with: 'password123'
@@ -54,6 +56,8 @@ RSpec.describe "As a visitor" do
 
       visit "/cart"
       click_on "Checkout"
+
+      click_link 'Ship to this Address'
 
       visit "/merchants/#{meg.id}"
       expect(page).to_not have_link("Delete Merchant")
