@@ -7,6 +7,15 @@ RSpec.describe("Order Creation") do
       @paper = @mike.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 3)
       @pencil = @mike.items.create(name: "Yellow Pencil", description: "You can write on paper with it!", price: 2, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
 
+      @user = User.create!(name: "Kay Russell", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123")
+      @address_2 = @user.addresses.create!(nickname: 'Work', street: "478 Hanover Blvd", city: "Denver", state: "CO", zip: 80128)
+      @address_3 = @user.addresses.create!(nickname: 'Rental, street: "101 Sixma Ave", city: "Deltona", state: "FL", zip: 32738)
+
+      visit '/login'
+      fill_in :email, with: 'test@gmail.com'
+      fill_in :password, with: 'password123'
+      click_button 'Login'
+
       visit "/items/#{@paper.id}"
       click_on "Add Item to Cart"
       visit "/items/#{@paper.id}"
@@ -15,12 +24,6 @@ RSpec.describe("Order Creation") do
       click_on "Add Item to Cart"
       visit "/items/#{@pencil.id}"
       click_on "Add Item to Cart"
-
-      @user = User.create!(name: "Gmoney", address: "123 Lincoln St", city: "Denver", state: "CO", zip: 23840, email: "test@gmail.com", password: "password123", password_confirmation: "password123")
-      visit '/login'
-      fill_in :email, with: 'test@gmail.com'
-      fill_in :password, with: 'password123'
-      click_button 'Login'
 
       visit "/cart"
       click_on "Checkout"
@@ -43,5 +46,31 @@ RSpec.describe("Order Creation") do
     #   expect(current_path).to eq('/items')
     #   expect(page).to have_content("Please add something to your cart to place an order")
     # end
+
+    xit 'allows user to choose shipping address' do
+      expect(current_path).to eq('/profile/orders/new')
+
+      expect(page).to have_content('Select Shipping Address')
+
+      within "#address-#{@address_2.id}" do
+        expect(page).to have_content(@address_2.nickname)
+        expect(page).to have_content(@address_2.street)
+        expect(page).to have_content(@address_2.city)
+        expect(page).to have_content(@address_2.state)
+        expect(page).to have_content(@address_2.zip)
+        expect(page).to have_link('Ship to this Address')
+      end
+
+      within "#address-#{@address_3.id}" do
+        expect(page).to have_content(@address_3.nickname)
+        expect(page).to have_content(@address_3.street)
+        expect(page).to have_content(@address_3.city)
+        expect(page).to have_content(@address_3.state)
+        expect(page).to have_content(@address_3.zip)
+        click_link 'Ship to this Address'
+      end
+
+      expect(current_path).to eq('/profile/orders')
+    end
   end
 end
