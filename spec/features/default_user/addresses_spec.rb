@@ -52,6 +52,16 @@ RSpec.describe 'As a default user', type: :feature do
     expect(page).to_not have_content(80128)
   end
 
+  it 'cannot edit an address if it has been on a shipped order' do
+    Order.create(user_id: @user.id, address_id: @address_2.id, status: 2)
+
+    visit "/profile/addresses/#{@address_2.id}/edit"
+
+    expect(current_path).to eq('/profile')
+
+    expect(page).to have_content("Addresses with orders that have been shipped cannot be edited or deleted")
+  end
+
   it 'shows flash messages when fields are blank in address edit' do
     within "#address-#{@address_2.id}" do
       click_link 'Edit'
@@ -126,5 +136,35 @@ RSpec.describe 'As a default user', type: :feature do
 
     expect(page).to have_selector("input[value='Rental']")
     expect(page).to have_selector("input[value='Harvey']")
+  end
+
+  it 'shows shipping address on order show page' do
+    order = Order.create(user_id: @user.id, address_id: @address_2.id, status: 2)
+
+    visit "/profile/orders/#{order.id}"
+
+    expect(page).to have_content('Shipping Address')
+    expect(page).to have_content('478 Hanover Blvd')
+    expect(page).to have_content('Denver')
+    expect(page).to have_content('CO')
+    expect(page).to have_content('80128')
+  end
+
+  it 'can use change address link from order show page if order has not shipped' do
+    order = Order.create(user_id: @user.id, address_id: @address_2.id)
+
+    visit "/profile/orders/#{order.id}"
+
+    click_link 'Change Address'
+
+    expect(current_path).to eq("/profile/addresses/#{@address_2.id}/edit")
+  end
+
+  it 'does not show change address link on order show page if order has shipped' do
+    order = Order.create(user_id: @user.id, address_id: @address_2.id, status: 2)
+
+    visit "/profile/orders/#{order.id}"
+
+    expect(page).to_not have_link('Change Address')
   end
 end
