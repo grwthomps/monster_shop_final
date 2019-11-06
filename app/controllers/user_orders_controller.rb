@@ -34,7 +34,7 @@ class UserOrdersController < ApplicationController
   end
 
   def create
-    order = Order.create(user_id: current_user.id)
+    order = Order.create(user_id: current_user.id, address_id: params[:address_id])
     if cart.contents.any? && order.save
       cart.items.each do |item,quantity|
         order.item_orders.create({
