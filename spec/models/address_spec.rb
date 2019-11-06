@@ -16,4 +16,17 @@ RSpec.describe Address, type: :model do
     it {should belong_to :user}
     it {should have_many :orders}
   end
+
+  describe 'instance methods' do
+    it 'can check for shipped orders with current address' do
+      user = User.create!(name: "Andy Dwyer", email: "test@gmail.com", password: "password123", password_confirmation: "password123")
+      address = user.addresses.create!(nickname: 'Work', street: "478 Hanover Blvd", city: "Denver", state: "CO", zip: 80128)
+
+      expect(address.no_orders?).to eq(true)
+
+      order = Order.create!(user_id: user.id, address_id: address.id, status: 2)
+
+      expect(address.no_orders?).to eq(false)
+    end
+  end
 end
