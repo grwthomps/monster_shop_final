@@ -6,7 +6,11 @@ class Address < ApplicationRecord
   belongs_to :user
   has_many :orders
 
-  def no_orders?
+  def any_orders?
+    orders.any?
+  end
+
+  def no_shipped_orders?
     orders.find_by(status: "shipped").nil?
   end
 end
