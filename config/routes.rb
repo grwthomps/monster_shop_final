@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :new, :create]
   end
 
-  resources :items, except: [:new, :create] do
+  resources :items, only: [:index, :show] do
     resources :reviews, only: [:new, :create]
   end
 

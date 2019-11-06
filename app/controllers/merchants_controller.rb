@@ -23,6 +23,7 @@ class MerchantsController <ApplicationController
 
   def edit
     @merchant = Merchant.find(params[:id])
+    render_404 if current_user.nil? || current_user.merchant_id != @merchant.id
   end
 
   def update
@@ -34,11 +35,6 @@ class MerchantsController <ApplicationController
       flash[:error] = @merchant.errors.full_messages
       render :edit
     end
-  end
-
-  def destroy
-    Merchant.destroy(params[:id])
-    redirect_to '/merchants'
   end
 
   private
